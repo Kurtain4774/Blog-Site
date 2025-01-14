@@ -1,0 +1,168 @@
+header{
+    flex: 0 1 auto;
+}
+.main-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+body{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+html{
+    height: 100%;
+    width: 100%;
+}
+
+h1{
+    font-weight: normal;
+    margin: 0;
+}
+footer{
+    width: 100%;
+    text-decoration: underline;
+}
+.footer-info{
+    padding: 35px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+}
+.clickable:hover{
+    cursor: pointer;
+}
+
+
+form{
+    text-align: center;
+    
+}
+form h1{
+    margin: 10px 0px 30px 0px;
+}
+
+/* Basic Form Container */
+.floating-label-form {
+    max-width: 400px;
+    width: 300px;
+    height: 400px;
+    margin: 0 auto;
+    padding: 20px 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 2px solid lightgray;
+  }
+  a{
+    text-decoration: none;
+    color: inherit;
+  }
+  /* Style the input containers (wrapper for input and label) */
+  .input-container {
+    position: relative; /* Important to position the label inside the input */
+    margin: 0px 0px 20px 0px; /* Space between input fields */
+  }
+  
+  /* Style the input fields */
+  .input-container input {
+    width: 100%;
+    padding: 12px 10px 12px 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: transparent; /* Transparent background */
+    outline: none;
+  }
+  
+  /* Style the labels */
+  .input-container label {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: #aaa;
+    transition: 0.2s ease all; /* Smooth transition for label movement */
+    pointer-events: none; /* Prevent label from interfering with input */
+  }
+  
+  /* When the input is focused or has a value, move the label */
+  .input-container input:focus + label,
+  .input-container input:not(:placeholder-shown) + label {
+    top: -10px; /* Move label above input */
+    font-size: 0.8rem; /* Reduce font size */
+    color: #007BFF; /* Change color when focused */
+  }
+  
+  /* Additional focus styling for input */
+  .input-container input:focus {
+    border-color: #007BFF; /* Highlight input border when focused */
+  }
+  
+  button{
+    width: 100%;
+    padding: 10px;
+    background-color: var(--secondary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  button:hover{
+    cursor: pointer;
+  }
+  .separator{
+    margin: 24px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .separator::before,
+  .separator::after{
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid lightgray;
+  }
+  .separator:not(:empty)::before {
+    margin-right: 1.5em;
+  }
+  
+  .separator:not(:empty)::after {
+    margin-left: 1.5em;
+  }
+  .forgot-password{
+    color:rgba(0, 0, 0, 0.8);
+    margin: 15px;
+  }
+  .sign-up{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25em;
+  }
+  .sign-up a{
+    color: var(--secondary)
+  }
+  a:hover{
+    cursor: pointer;
+  }
+  :root{
+    --primary: #F4F4F4;
+    --primary-text: #333333;
+    --secondary: #4A90E2;
+    --secondary2: #FF6F61;
+    --complimentary: #7D8B6A;
+    --complimentary2: #F1E0C6;
+    --highlight: #e3e3e3;
+
+    --menu-width: 220px;
+    --content-width: 45rem;
+}

@@ -4,19 +4,18 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <link rel="stylesheet" href="index.css">
-        <link rel="stylesheet" href="nav.css">
+        <link rel="stylesheet" href="../../nav.css">
+        <link rel="stylesheet" href="create-post.css">
     </head>
     
     <body>
         <header>
             <div class="nav-bar">
                 <div class="title">
-                    <a href="index.html">Food For Thought</a>
+                    <a href="../../index.html">Food For Thought</a>
                 </div>
             </div>
         </header>
-
         <main>
             <div class="menu">
                 <div class="home menu-item" onclick="changeToHome()">
@@ -34,16 +33,16 @@
                 </div>
             </div>
 
-            <div class="content">
-                <div class="content-title"> 
-                    <h1>Posts</h1>
-                </div>
-                <div class="post">
-                    Post 1
-                </div>
-                <div class="post">
-                    Post 2
-                </div>
+            <div class="main-container">
+                <h1>Create Post</h1>
+                <form class="create-post-form" id="create-post-form">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" required>
+                    <label for="content">Content</label>
+                    <textarea id="content" name="content" placeholder="Enter your message here..." required></textarea><br>
+
+                    <button type="submit">Post</button>
+                </form>
             </div>
         </main>
 
@@ -58,6 +57,6 @@
             </div>
         </footer>
 
-        <script src="main.js"></script>
+        <script src="create-post.js"></script>
     </body>
 </html>
