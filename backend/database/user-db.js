@@ -35,7 +35,9 @@ async function getUser(username){
     const db = client.db(databaseName);
     const col = db.collection(collectionName);
 
-    return await col.findOne({username: username});
+    return await col.findOne({
+        username: { $regex: `^${username}$`, $options: 'i' }
+    });
 }
 
 async function createUser(username, password){

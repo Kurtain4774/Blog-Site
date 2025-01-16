@@ -28,8 +28,6 @@ const getUser = async (req, res) => {
     
     let user = await database.getUser(username);
 
-    console.log(user);
-
     if(!user){
         return res.status(404).json({ status: 'error', message: 'User not found' });
     }
