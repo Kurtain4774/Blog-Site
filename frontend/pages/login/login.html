@@ -18,15 +18,28 @@
 
         <div class="main-container">
             <card class="login-container">
-                <form class="floating-label-form">
+                <form id="login-form" class="floating-label-form">
                     <h1>Sign In</h1>
+                    <div id="error-message-container" class="error-message hidden">
+                        <p id="error-message-text"></p>
+                    </div>
                     <div class="input-container">
-                        <input type="text" id="username" name="username" placeholder="" required> 
+                        <input type="text" id="username" name="username" placeholder=""> 
                         <label for="username">Username</label>
                     </div>
                     <div class="input-container">
-                        <input type="text" id="password" name="password" placeholder="" required>
-                        <label for="password">Password</label>
+                        <div class="password-container">
+                            <div class="password-input-container">
+                                <input type="password" id="password" name="password" placeholder="">
+                                <label for="password">Password</label>
+                            </div>
+                            <div class="password-show-button-container">
+                                <button id="password-show-button" class="hidden">
+                                    Show
+                                </button>
+                            </div>
+                        </div>
+                        
                     </div>
                     
                     <button type="submit"> Log in </button>
@@ -56,5 +69,6 @@
                 </div>
             </div>
         </footer>
+        <script src="login.js"></script>
     </body>
 </htmL>
