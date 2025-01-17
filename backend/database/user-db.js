@@ -41,7 +41,9 @@ async function getUser(username){
 }
 
 async function createUser(username, password){
-    const existingUser = await client.db(databaseName).collection(collectionName).findOne({username: username});
+    const existingUser = await client.db(databaseName).collection(collectionName).findOne({
+        username: { $regex: `^${username}$`, $options: 'i' }
+    });
 
     if (existingUser != null) {
         console.log(existingUser);

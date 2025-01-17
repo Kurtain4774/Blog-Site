@@ -1,6 +1,7 @@
 const username = document.getElementById("username");
 const password = document.getElementById("password");
 const passwordShowButton = document.getElementById("password-show-button");
+const errorMessage = document.getElementById("error-message-container");
 
 let passwordVisibility = true;
 function showPassword(){
@@ -8,6 +9,9 @@ function showPassword(){
 }
 function hidePassword(){
     password.type = "password";
+}
+function formGood(){
+  errorMessage.classList.add("hidden");
 }
 function checkForm(){
     if(username.value.trim() === ''){
@@ -41,13 +45,14 @@ function submit(){
       .then(response => {
         if (!response.ok) {
           formError("You're password was incorrect. <br> Please try again.");
+        } else {
+          formGood();
+          
+          console.log('Login successful:'); // Handle success
+          changeToHome();
         }
-        return response.json(); // Parse the JSON response
-      })
-      .then(result => {
-        console.log('Login successful:', result); // Handle success
-      })
-      .catch(error => {
+        
+      }).catch(error => {
         console.error('Error during login:', error); // Handle errors
       });
 }
@@ -92,4 +97,6 @@ document.getElementById("login-form").addEventListener("submit", function (event
     }
   });
 
-  
+  function changeToHome(){
+    window.location.href = "../../index.html";
+}
