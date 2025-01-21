@@ -1,6 +1,6 @@
 const database = require('../database/user-db.js');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 function generateToken(userId, username) {
     const secretKey = process.env.JWT_SECRET_KEY; // Use environment variables for production
