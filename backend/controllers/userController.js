@@ -2,23 +2,32 @@ const database = require('../database/user-db.js');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-function generateToken(userId) {
-    const secretKey = process.env.JWT_SECRET || 'your_jwt_secret_key'; // Use environment variables for production
+function generateToken(userId, username) {
+    const secretKey = process.env.JWT_SECRET_KEY; // Use environment variables for production
     const token = jwt.sign(
-        { id: userId }, // Payload (user data)
+        { id: userId, username: username }, // Payload (user data)
         secretKey,      // Secret key to sign the token
-        { expiresIn: '1h' } // Token expiration time
+        { expiresIn: '24h' } // Token expiration time
     );
     return token;
 }
-function verifyToken(token) {
-    try {
-        const secretKey = process.env.JWT_SECRET || 'your_jwt_secret_key';
-        const decoded = jwt.verify(token, secretKey); // Verifies the token and decodes it
-        return decoded; // Returns the decoded payload (e.g., { id: userId })
-    } catch (error) {
-        throw new Error('Invalid token');
+const verifyToken = async (req, res) => {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+
+    if(!token){
+        return res.status(401).json({message: 'No token provided'});
     }
+
+    const secretKey = process.env.JWT_SECRET_KEY;
+
+    jwt.verify(token, secretKey, function (err, decoded) {
+        if (err) {
+            return res.status(400).json({message: "Token Error",error: err.message});
+        } else {
+            return res.status(200).json({message: "SUCCESS", user: decoded})
+        }
+    });
 }
 
 const getUser = async (req, res) => {
@@ -37,8 +46,8 @@ const getUser = async (req, res) => {
         return res.status(401).json({ message: 'Password does not match username' });
     }
 
-    const token = generateToken(user._id);
-    return res.status(200).json({ message: 'Login successful', token });
+    const token = generateToken(user._id, username);
+    return res.status(200).json({ message: 'Login successful', token: token });
 }
 
 const createUser = async (req, res) => {
@@ -50,18 +59,18 @@ const createUser = async (req, res) => {
         return res.status(400).json({ message: 'Please provide all required fields' });
     }
 
-    const status = await database.createUser(username, password);
+    const result = await database.createUser(username, password);
 
-    if(status.status == 'success'){
-        return res.status(201).json({ message: status.message});
-    } else if(status.status == 'error1'){
-        return res.status(400).json({message: status.message});
+    if(result.status == 'success'){
+        const token = generateToken(result._id, username);
+        return res.status(201).json({ message: "Registration successful", token: token});
     } else {
-        return res.status(400).json({message: status.message, error: status.error});
+        return res.status(400).json({message: result.message});
     }
 }
 
 module.exports = {
     getUser,
     createUser,
+    verifyToken,
 }

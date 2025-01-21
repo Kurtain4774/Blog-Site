@@ -10,4 +10,8 @@ function createNewPost(){
 function changeToHome(){
     window.location.href = "./index.html";
 }
-
+function logout(){
+    localStorage.clear();
+    document.getElementById("logout-menu").classList.add("hidden");
+    document.getElementById("login-menu-container").classList.remove("hidden");
+}

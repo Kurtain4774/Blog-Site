@@ -32,7 +32,7 @@ function submitForm() {
     username: username.value.trim(),
     password: password.value.trim(),
   };
-  fetch("http://localhost:3001/api/user/register", {
+  fetch("http://localhost:3000/user/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
@@ -41,10 +41,16 @@ function submitForm() {
       if (!response.ok) {
         formError("Username has already been taken. <br> Please try again.");
       } else {
-        formGood();
-        console.log("Registration successful:", response.json()); // Handle success
-        changeToHome();
+        return response.json();
       }
+    }).then(data => {
+      formGood();
+
+      const token = data.token;
+      localStorage.setItem('token', token);
+      console.log("TOKEN: " + token);
+      console.log("Registration successful:", response.json()); // Handle success
+      changeToHome();
     }).catch((error) => {
       console.error("Error during creating user:", error); // Handle errors
     });

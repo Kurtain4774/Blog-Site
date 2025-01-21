@@ -41,25 +41,24 @@ async function getUser(username){
 }
 
 async function createUser(username, password){
-    const existingUser = await client.db(databaseName).collection(collectionName).findOne({
-        username: { $regex: `^${username}$`, $options: 'i' }
-    });
+    try{
+        const existingUser = await client.db(databaseName).collection(collectionName).findOne({
+            username: { $regex: `^${username}$`, $options: 'i' }
+        });
+    
+        if (existingUser) {
+            return { status: 'error', message: 'User already exists' };
+        }
 
-    if (existingUser != null) {
-        console.log(existingUser);
-        return { status: 'error1', message: 'User already exists' };
-    }
+        const newUser = new User({
+            username: username,
+            password: password
+        });
 
-    const newUser = new User({
-        username: username,
-        password: password
-    });
-
-    try {
-        await newUser.save();
-        return { status: 'success', message: 'User created successfully' };
-    } catch (error) {
-        return { status: 'error2', message: 'Error creating user', error: error.message };
+        const savedUser = await newUser.save();
+        return { status: 'success', id: savedUser._id };
+    } catch(error){
+        return { status: 'error', message: 'Error creating user'};
     }
 }
 

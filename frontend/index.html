@@ -19,18 +19,26 @@
 
         <main>
             <div class="menu">
-                <div class="home menu-item" onclick="changeToHome()">
+                <div class="menu-item active" onclick="changeToHome()">
                     <a>Home</a>
                 </div>
-                <div class="create-post menu-item" onclick="createNewPost()">
+                <div class="menu-item" onclick="createNewPost()">
                     <a>Create Post</a>
                 </div>
                 <hr>
-                <div class="menu-item login" onclick="changeToLogin()">
-                    <a href=>Login</a>
+                <div id="login-menu-container" class="hidden">
+                    <div id="login-menu" class="login-menu">
+                        <div class="menu-item" onclick="changeToLogin()">
+                            <a>Login</a>
+                        </div>
+                        <div class="menu-item" onclick="changeToRegister()">
+                            <a>Register</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="menu-item" onclick="changeToRegister()">
-                    <a href="pages/register/register.html">Register</a>
+                
+                <div id="logout-menu" class="menu-item hidden" onclick="logout()">
+                    <a>Logout</a>
                 </div>
             </div>
 
@@ -58,6 +66,7 @@
             </div>
         </footer>
 
+        <script src="authorize.js"></script>
         <script src="main.js"></script>
     </body>
 </html>
